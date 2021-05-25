@@ -1,36 +1,32 @@
 FROM ubuntu:latest
 
-    RUN apt-get -y update 
-    RUN apt-get -y upgrade
-    # install iozone and iperf
-    RUN apt-get install -y iozone3 iperf3  
-    # install dependencies
-    RUN apt-get install -y libc6-i386 libstdc++6 wget build-essential gcc cpp make zip
+    RUN apt-get update && apt-get -y upgrade
 
-    # copy benchmark files to container
+    # Install iozone and iperf
+    RUN apt-get install -y iozone3 iperf3
+
+    # Copy benchmark files to container
     VOLUME /docker_benchmark 
     COPY ./benchmarks /docker_benchmark
 
-    # set docker_benchmark as starting directory
+    # Set docker_benchmark as starting directory
     WORKDIR /docker_benchmark
 
-
-    # setup and install geekbench
+    # Install geekbench dependencies
     RUN dpkg --add-architecture i386 \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y wget \
-                                                  libc6:i386 \
-                                                  libstdc++6:i386 \
+    && apt-get install --no-install-recommends -y wget libc6:i386 libstdc++6:i386 \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
+    # Set geekbench version
     ENV GEEKBENCHVERSION Geekbench-5.4.1-Linux
     ENV GEEKBENCHPACKAGE $GEEKBENCHVERSION.tar.gz
 
+    # Download and install geekbench
     RUN wget --quiet --no-check-certificate https://cdn.geekbench.com/$GEEKBENCHPACKAGE -O /tmp/$GEEKBENCHPACKAGE \
         && mkdir -p /opt/geekbench \
         && tar xzf /tmp/$GEEKBENCHPACKAGE -C /opt/geekbench \
         && rm -rf /tmp/$GEEKBENCHPACKAGE
 
-    # run all tests
-    ENTRYPOINT ["bash", "./run.sh"]
+    # Run all tests
+    #ENTRYPOINT ["bash", "./run.sh"]
