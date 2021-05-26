@@ -1,0 +1,14 @@
+TCP Results
+
+       Transfer     Bandwidth
+qemu   2.94 GBytes  2.53 Gbits/sec
+mint   9.82 GBytes  8.43 Gbits/sec
+docker 18.8 GBytes  16.1 Gbits/sec
+
+
+UDP Results
+
+       Transfer     Bandwidth
+qemu   1.25 MBytes  1.05 Mbits/sec
+mint   1.25 MBytes  1.05 Mbits/sec
+docker 1.25 MBytes  1.05 Mbits/sec

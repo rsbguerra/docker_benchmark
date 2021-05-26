@@ -1,0 +1,11 @@
+2099342.5, Initial write
+439606.28125, Rewrite
+6347189.75, Read
+5822027, Re-read
+7359256.5, Reverse Read
+7763017.5, Stride read
+6631080.75, Random read
+4381666.125, Mixed workload
+580689.53125, Random write
+2058809.0625, Fwrite
+5131047.75, Fread
